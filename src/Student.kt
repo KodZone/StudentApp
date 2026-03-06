@@ -1,5 +1,5 @@
 
-class Student(val id: String, val name: String, val course: String,
+abstract class Student(val id: String, val name: String, val course: String,
     markIn: Double) {
     /* markIn is an initial mark value passed to the constructor
      * to initialise the student's mark */
@@ -10,16 +10,8 @@ class Student(val id: String, val name: String, val course: String,
         }
     init { mark = markIn } // This will  trigger the custom setter.
 
-    // Task B: getGrade() method
-    fun getGrade(): String {
-        return when {
-            mark >= 70 -> "First"
-            mark >= 60 -> "2/1"
-            mark >= 50 -> "2/2"
-            mark >= 40 -> "Third"
-            else -> "Fail"
-        }
-    }
+    // Abstract method – must be overridden in subclasses
+    abstract fun getGrade(): String
 
     // Task C: didPass() method
     fun didPass(): Boolean {

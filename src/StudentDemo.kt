@@ -20,9 +20,18 @@ fun main() {
         print("Enter mark (0-100): ")
         val markInput = readln().toDouble()
 
-        // Create the Student object
-        // markInput will be validated by the custom setter
-        val student = Student(id, name, course, markInput)
+        print("Enter student type (u = Undergraduate, m = Masters): ")
+        val type = readln().lowercase()
+
+        // Create the correct type of student
+        val student: Student = when (type) {
+            "u" -> Undergraduate(id, name, course, markInput)
+            "m" -> Masters(id, name, course, markInput)
+            else -> {
+                println("Invalid student type. Defaulting to Undergraduate.")
+                Undergraduate(id, name, course, markInput)
+            }
+        }
 
         println()
         println("Student Record")
