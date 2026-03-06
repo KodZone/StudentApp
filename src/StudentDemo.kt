@@ -3,34 +3,35 @@ fun main() {
 
     while (true) {
 
-        // Display prompt and read the student's ID from console input
         print("Enter student ID: ")
         val id = readln()
 
-        // Display prompt and read the student's name from console input
-        print("Enter student name (or quit to stop): ")
+        print("Enter student name (or type 'quit' to stop): ")
         val name = readln()
 
-        // Stop the loop when the user types "quit"
-        if (name == "quit") {
+        // Stop the program if the user enters quit
+        if (name.lowercase() == "quit") {
             break
         }
 
-        // Display prompt and read the course from console input
         print("Enter course: ")
         val course = readln()
 
-        // Display prompt and read the mark from console input
-        print("Enter mark: ")
-        val mark = readln().toDouble()
+        print("Enter mark (0-100): ")
+        val markInput = readln().toDouble()
 
-        // Construct a Student object using the entered data
-        val student = Student(id, name, course, mark)
+        // Create the Student object
+        // markInput will be validated by the custom setter
+        val student = Student(id, name, course, markInput)
 
+        println()
+        println("Student Record")
+        println("--------------")
         println(student)
+        println("Grade: ${student.getGrade()}")
+        println("Passed: ${student.didPass()}")
         println()
     }
 
-    // After the loop ends, display "Program finished"
     println("Program finished.")
 }
