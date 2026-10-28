@@ -1,5 +1,8 @@
-
 fun main() {
+
+    // Step 3 – Create a mutable list to store all Student objects.
+    // The list can hold both Undergraduate and Masters objects.
+    val students = mutableListOf<Student>()
 
     while (true) {
 
@@ -9,7 +12,7 @@ fun main() {
         print("Enter student name (or type 'quit' to stop): ")
         val name = readln()
 
-        // Stop the program if the user enters quit
+        // Stop entering students when the user types quit.
         if (name.lowercase() == "quit") {
             break
         }
@@ -23,7 +26,7 @@ fun main() {
         print("Enter student type (u = Undergraduate, m = Masters): ")
         val type = readln().lowercase()
 
-        // Create the correct type of student
+        // Step 4 – Create the appropriate student object.
         val student: Student = when (type) {
             "u" -> Undergraduate(id, name, course, markInput)
             "m" -> Masters(id, name, course, markInput)
@@ -33,10 +36,25 @@ fun main() {
             }
         }
 
+        // Step 4 – Immediately add the new student to the list.
+        students.add(student)
+
+        println("Student added.")
         println()
-        println("Student Record")
-        println("--------------")
+    }
+
+    // Step 5 – Display all students after data entry finishes.
+    println()
+    println("All Student Records")
+    println("-------------------")
+
+    // Step 5 – Use a second loop to go through the list.
+    for (student in students) {
+
+        // Automatically calls the Student class's toString() method.
         println(student)
+
+        // Calls the grading method for the actual student type.
         println("Grade: ${student.getGrade()}")
         println("Passed: ${student.didPass()}")
         println()
