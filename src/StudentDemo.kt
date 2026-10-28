@@ -1,15 +1,10 @@
 fun main() {
 
-    // Exercise 2 Step 4 – Create one University object to store and manage students.
     val university = University()
-
-    // Exercise 2 Step 6 – Create a String variable for the user's menu choice.
     var choice: String = ""
 
-    // Exercise 2 Step 6 – Repeat the menu until the user chooses "4".
     while (choice != "4") {
 
-        // Exercise 2 Step 5 – Display the menu.
         println()
         println("University Menu")
         println("---------------")
@@ -21,73 +16,73 @@ fun main() {
 
         choice = readln()
 
-        // Exercise 2 Step 7 – Handle the selected menu option.
         when (choice) {
 
             "1" -> {
-                // Option 1 – Read the student's details.
-                print("Enter student ID: ")
-                val id = readln()
-
-                print("Enter student name: ")
-                val name = readln()
-
-                print("Enter course: ")
-                val course = readln()
-
-                print("Enter mark (0-100): ")
-                val markInput = readln().toDouble()
-
+                // Step 4 – Ask for the student type first.
                 print("Enter student type (u = Undergraduate, m = Masters): ")
                 val type = readln().lowercase()
 
-                // Create the appropriate student object.
-                val student: Student = when (type) {
-                    "u" -> Undergraduate(id, name, course, markInput)
-                    "m" -> Masters(id, name, course, markInput)
-                    else -> {
-                        println("Invalid type. Defaulting to Undergraduate.")
-                        Undergraduate(id, name, course, markInput)
-                    }
-                }
+                if (type == "u" || type == "m") {
 
-                // Enrol the student through the University object.
-                university.enrolStudent(student)
-                println("Student enrolled successfully.")
+                    // Step 4 – Read the common student information.
+                    print("Enter student ID: ")
+                    val id = readln()
+
+                    print("Enter student name: ")
+                    val name = readln()
+
+                    print("Enter course: ")
+                    val course = readln()
+
+                    print("Enter mark (0-100): ")
+                    val markInput = readln().toDouble()
+
+                    // Step 4 – Store either subclass object
+                    // in a variable of type Student (polymorphism).
+                    val theStudent: Student = if (type == "u") {
+                        Undergraduate(id, name, course, markInput)
+                    } else {
+                        Masters(id, name, course, markInput)
+                    }
+
+                    // Step 4 – Add the student to the university.
+                    university.enrolStudent(theStudent)
+                    println("Student enrolled successfully.")
+
+                } else {
+                    println("Invalid student type. Please enter u or m.")
+                }
             }
 
             "2" -> {
-                // Option 2 – Search for a student by ID.
+                // Step 5 – Search for a student by ID.
                 print("Enter student ID: ")
                 val id = readln()
 
-                val student = university.findStudentById(id)
+                val foundStudent = university.findStudentById(id)
 
-                // Check whether a matching student was found.
-                if (student != null) {
-                    println(student)
-                    println("Grade: ${student.getGrade()}")
-                    println("Passed: ${student.didPass()}")
+                if (foundStudent != null) {
+                    // Step 7 – Calls the actual subclass's toString().
+                    println(foundStudent)
                 } else {
-                    println("No student found with this ID.")
+                    println("Student not found.")
                 }
             }
 
             "3" -> {
-                // Option 3 – Search for all students with the given name.
+                // Step 6 – Search for students by name.
                 print("Enter student name: ")
                 val name = readln()
 
                 val results = university.findStudentsByName(name)
 
                 if (results.isEmpty()) {
-                    println("No students found with this name.")
+                    println("No students found.")
                 } else {
-                    // Display every matching student.
-                    for (student in results) {
-                        println(student)
-                        println("Grade: ${student.getGrade()}")
-                        println("Passed: ${student.didPass()}")
+                    for (foundStudent in results) {
+                        // Step 7 – Calls the actual subclass's toString().
+                        println(foundStudent)
                         println()
                     }
                 }

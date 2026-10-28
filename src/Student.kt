@@ -1,24 +1,30 @@
 
-abstract class Student(val id: String, val name: String, val course: String,
-    markIn: Double) {
-    /* markIn is an initial mark value passed to the constructor
-     * to initialise the student's mark */
+abstract class Student(
+    val id: String,
+    val name: String,
+    val course: String,
+    markIn: Double
+) {
 
     var mark = 0.0
         set(newMark) {
-            if (newMark in 0.0..100.0) {field = newMark}
+            if (newMark in 0.0..100.0) {
+                field = newMark
+            }
         }
-    init { mark = markIn } // This will  trigger the custom setter.
 
-    // Abstract method – must be overridden in subclasses
+    init {
+        mark = markIn
+    }
+
     abstract fun getGrade(): String
 
-    // Task C: didPass() method
     fun didPass(): Boolean {
         return mark >= 40
     }
 
+    // Step 3 – Superclass provides the common student details.
     override fun toString(): String {
-        return "Name: $name Course: $course Mark: $mark"
+        return "ID: $id Name: $name Course: $course Mark: $mark"
     }
 }
