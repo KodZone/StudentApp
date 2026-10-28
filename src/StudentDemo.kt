@@ -1,6 +1,6 @@
 fun main() {
 
-    // Step 3 – Create a mutable list to store all Student objects.
+    // Exercise 1 Step 3 – Create a mutable list to store all Student objects.
     // The list can hold both Undergraduate and Masters objects.
     val students = mutableListOf<Student>()
 
@@ -26,7 +26,7 @@ fun main() {
         print("Enter student type (u = Undergraduate, m = Masters): ")
         val type = readln().lowercase()
 
-        // Step 4 – Create the appropriate student object.
+        // Exercise 1 Step 4 – Create the appropriate student object.
         val student: Student = when (type) {
             "u" -> Undergraduate(id, name, course, markInput)
             "m" -> Masters(id, name, course, markInput)
@@ -36,14 +36,14 @@ fun main() {
             }
         }
 
-        // Step 4 – Immediately add the new student to the list.
+        // Exercise 1 Step 4 – Immediately add the new student to the list.
         students.add(student)
 
         println("Student added.")
         println()
     }
 
-    // Step 5 – Display all students after data entry finishes.
+    // Exercise 1 Step 5 – Display all students after data entry finishes.
     println()
     println("All Student Records")
     println("-------------------")
